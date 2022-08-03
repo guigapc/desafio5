@@ -41,22 +41,17 @@ kind: Deployment
 metadata:
   name: kubenews
 spec:
-  replicas: 20
-  selector:
+  selector: 
     matchLabels:
       app: kubenews
   template:
     metadata:
       labels:
-        app: kubenews  
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/metrics"
+        app: kubenews
     spec:
       containers:
       - name: kubenews
-        image: fabricioveronez/kube-news:11
+        image: guigapc/kube-news:v1
         env:
         - name: DB_DATABASE
           value: "kubenews"
@@ -65,12 +60,12 @@ spec:
         - name: DB_PASSWORD
           value: "Kube#123"
         - name: DB_HOST
-          value: "postgre"      
+          value: "postgre"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-news
+  name: kubenews
 spec:
   selector:
     app: kubenews
@@ -78,4 +73,4 @@ spec:
   - port: 80
     targetPort: 8080
     nodePort: 30000
-  type: LoadBalancer
+  type: NodePort
