@@ -1,2 +1,4 @@
 # kube-news
-```teste ```
+``` if ($allowed_country = no) { ```
+        ```return 444; ```
+```} ```
